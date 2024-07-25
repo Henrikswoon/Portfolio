@@ -1,0 +1,14 @@
+# Go related ignores
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.test~
+*.out
+*.out~
+*.json
+# Dependency directories
+**/vendor
+**/Godeps
