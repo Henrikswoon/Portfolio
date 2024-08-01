@@ -1,0 +1,22 @@
+package project
+
+type Article struct{
+    Title string
+    Content string
+    URL string
+}
+templ Display(articles []Article){
+    <section class="project">
+        for _, item := range articles{
+            @article(item.Title, item.Content, item.URL)
+        }
+    </section>
+}                           
+
+templ article(title string, content string, url string){
+    <div class="fade-me-in fade-me-out">
+        <h1>{title}</h1>
+        <p>{content}</p>
+        <p>> <a href={templ.URL(url)}>{url}</a></p>
+    </div> 
+}

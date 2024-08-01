@@ -26,7 +26,7 @@ func section(title string, content string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"fade-me-in fade-me-out\"><h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -60,24 +60,12 @@ func section(title string, content string) templ.Component {
 	})
 }
 
-type Section struct {
-	title   string
-	content string
+type Paragraph struct {
+	Title   string
+	Content string
 }
 
-var Sections = []Section{
-	{
-		title:   "Education",
-		content: "I have studied for 5 years at Umeå university where i've developed skills in software developement especially web developement and during my later years security and cryptography.",
-	},
-
-	{
-		title:   "Personal life",
-		content: "I was born the year 1999 and been pretty busy ever since. I enjoy Martial Arts, Bouldering, Music, Computers and Games",
-	},
-}
-
-func Agregate(sections []Section) templ.Component {
+func Agregate(sections []Paragraph) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -100,12 +88,12 @@ func Agregate(sections []Section) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		for _, item := range sections {
-			templ_7745c5c3_Err = section(item.title, item.content).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = section(item.Title, item.Content).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"CV fade-me-in fade-me-out\"><h1>CV</h1><p>><a href=\"/resources/CV.pdf\" download>Download a copy of my CV</a></p></div></section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

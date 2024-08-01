@@ -1,32 +1,24 @@
 package about
 templ section(title string, content string) {
-    <div>
+    <div class="fade-me-in fade-me-out">
        <h1>{title}</h1>
         <p>{content}</p>
     </div>
 }
 
-type Section struct {
-    title string
-    content string
+type Paragraph struct {
+    Title string
+    Content string
 }
 
-var Sections = []Section{
-    {
-        title: "Education", 
-        content: "I have studied for 5 years at Umeå university where i've developed skills in software developement especially web developement and during my later years security and cryptography.",
-    },
-
-    {
-        title: "Personal life", 
-        content: "I was born the year 1999 and been pretty busy ever since. I enjoy Martial Arts, Bouldering, Music, Computers and Games",
-    },
-}
-
-templ Agregate(sections []Section){
+templ Agregate(sections []Paragraph){
     <section class="about"> 
         for _, item := range sections{
-            @section(item.title, item.content)
+            @section(item.Title, item.Content)
         }
+    <div class="CV fade-me-in fade-me-out">
+        <h1>CV</h1>
+        <p>><a href="/resources/CV.pdf" download>Download a copy of my CV</a></p>
+    </div>
     </section>
 }

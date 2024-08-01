@@ -88,21 +88,146 @@ menu li:before {
   transform: translateY(-50%);
 }
 
-.about {
-  width: 90%;
-  padding: 5%;
+.about, .contact, .project {
+  padding: 2%;
+  padding-bottom: 1%;
   display: flex;
   flex-direction: column;
+}
+
+.about :nth-child(1n), .project :nth-child(1n) {
+  transition-delay: 0s;
+}
+
+.about :nth-child(2n), .project :nth-child(2n) {
+  transition-delay: 0.5s;
+}
+
+.about :nth-child(3n), .project :nth-child(3n) {
+  transition-delay: 1s;
+}
+
+.about :nth-child(4n), .project :nth-child(4n) {
+  transition-delay: 1.5s;
+}
+
+.about :nth-child(5n), .project :nth-child(5n) {
+  transition-delay: 2s;
+}
+
+.about :nth-child(6n), .project :nth-child(6n) {
+  transition-delay: 2.5s;
+}
+
+.about :nth-child(7n), .project :nth-child(7n) {
+  transition-delay: 3s;
+}
+
+.about :nth-child(8n), .project :nth-child(8n) {
+  transition-delay: 3.5s;
+}
+
+.about :nth-child(9n), .project :nth-child(9n) {
+  transition-delay: 4s;
+}
+
+.about :nth-child(10n), .project :nth-child(10n) {
+  transition-delay: 4.5s;
+}
+
+.about :nth-child(11n), .project :nth-child(11n) {
+  transition-delay: 5s;
+}
+
+.about :nth-child(12n), .project :nth-child(12n) {
+  transition-delay: 5.5s;
+}
+
+.about :nth-child(13n), .project :nth-child(13n) {
+  transition-delay: 6s;
+}
+
+.about :nth-child(14n), .project :nth-child(14n) {
+  transition-delay: 6.5s;
+}
+
+.about :nth-child(15n), .project :nth-child(15n) {
+  transition-delay: 7s;
+}
+
+.contact {
+  transition-delay: 0s;
 }
 
 .about div {
   padding-bottom: 30px;
 }
 
-.about h1 {
+.about > div > p > a, .contact > div > p > a, .project > div > p > a {
+  color: white;
+}
+
+.about h1, .contact h1, .project h1 {
   padding: 8px;
   background-color: #1e1e1e;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.htmx-settling > .about > .fade-me-in, .htmx-settling .contact > .fade-me-in, .htmx-settling > .project > .fade-me-in {
+  opacity: 0;
+}
+
+.fade-me-in {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.fade-me-out.htmx-swapping {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.CV {
+  padding-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  hgroup h2 {
+    font-size: 2.5em;
+  }
+  hgroup p {
+    font-size: 1.2em;
+  }
+  nav a {
+    font-size: 1.2em;
+  }
+  #nav-image {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3%;
+  }
+  .icon-tool {
+    width: 2.5em;
+    size: 2.5em;
+  }
+}
+@media (max-width: 400px) {
+  hgroup h2 {
+    font-size: 2em;
+  }
+  hgroup p {
+    font-size: 1.5em;
+  }
+  nav a {
+    font-size: 1.5em;
+  }
+  #nav-image {
+    grid-template-columns: 1fr;
+    column-gap: 2%;
+  }
+  .icon-tool {
+    width: 3em;
+    size: 3em;
+  }
 }
 
 /*# sourceMappingURL=stylesheet.css.map */

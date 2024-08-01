@@ -1,0 +1,20 @@
+package contact
+
+type Link struct{
+    URL string
+    Name string
+}
+templ Display(links []Link){
+    <section class="contact">
+        <div class="fade-me-in fade-me-out">
+            <h1>You can find me at...</h1>
+            for _, item := range links{
+                @contact_link(item.URL,item.Name)
+            }
+        </div>
+    </section>
+}                           
+
+templ contact_link(url string, name string){
+   <p>> <a href={templ.URL(url)}> {name}</a></p>
+}

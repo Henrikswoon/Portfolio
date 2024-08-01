@@ -19,6 +19,10 @@ import (
 	"time"
 
 	"modules/internal/components/about"
+	"modules/internal/components/contact"
+	project "modules/internal/components/projects"
+
+	//"modules/internal/components/project"
 
 	"github.com/a-h/templ"
 	"github.com/gorilla/mux"
@@ -203,9 +207,48 @@ func main() {
 	r.Use(LoggingMiddleware)
 	r.PathPrefix("/resources/").Handler(http.StripPrefix("/resources", http.FileServer(http.Dir("./resources"))))
 
-	//r.PathPrefix("/projects/").Handler(http.StripPrefix("/projects", templ.Handler(nil)))
-	r.PathPrefix("/About").Handler(templ.Handler(about.Agregate(about.Sections)))
-	//r.PathPrefix("/contact/").Handler(http.StripPrefix("/contact", templ.Handler(nil)))
+	var P = []about.Paragraph{
+		{
+			Title:   "EDUCATION",
+			Content: "I have studied for 5 years at Umeå university where i've developed skills in software developement, especially technologies related to web developement and during my later years security and cryptography.",
+		},
+
+		{
+			Title:   "PERSONAL LIFE",
+			Content: "I was born the year 1999 and been pretty busy ever since. I enjoy Martial Arts, Bouldering, Music, Computers and Games",
+		},
+	}
+	r.PathPrefix("/About").Handler(templ.Handler(about.Agregate(P)))
+
+	var L = []contact.Link{
+		{
+			URL:  "mailto:melhen12344@gmail.com",
+			Name: "melhen12344@gmail.com",
+		},
+		{
+			URL:  "https://www.linkedin.com/in/melker-henriksson?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BduMS0lLfSTq4LiRoBEqSJw%3D%3D",
+			Name: "linkedin.com/in/melker-henriksson",
+		},
+		{
+			URL:  "https://github.com/Henrikswoon",
+			Name: "https://github.com/Henrikswoon",
+		},
+	}
+	r.PathPrefix("/Contact").Handler(templ.Handler(contact.Display(L)))
+
+	var A = []project.Article{
+		{
+			Title:   "Portfolio",
+			Content: "I decided to make this portfolio using Go, HTMX, Templ and Sass as i have been interested in these technologies. I have found GO+HTMX to be a nice opportunity as they deal with 'the nitty gritty' more so than many .js frameworks i have worked with (although i was pretty tempted to write this in Next.js instead)\n",
+			URL:     "melker.dev",
+		},
+		{
+			Title:   "HearthHaven",
+			Content: "A game that i want to make, will write more about it given that it is further developed",
+			URL:     "https://github.com/Henrikswoon/Hearth-haven",
+		},
+	}
+	r.PathPrefix("/Projects").Handler(templ.Handler(project.Display(A)))
 
 	srv := &http.Server{
 		Handler:      r,
