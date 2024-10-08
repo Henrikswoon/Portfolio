@@ -207,18 +207,24 @@ func main() {
 	r.Use(LoggingMiddleware)
 	r.PathPrefix("/resources/").Handler(http.StripPrefix("/resources", http.FileServer(http.Dir("./resources"))))
 
-	var P = []about.Paragraph{
-		{
-			Title:   "EDUCATION",
-			Content: "I have studied for 5 years at Umeå university where i've developed skills in software developement, especially technologies related to web developement and during my later years security and cryptography.",
-		},
-
-		{
-			Title:   "PERSONAL LIFE",
-			Content: "I was born the year 1999 and been pretty busy ever since. I enjoy Martial Arts, Bouldering, Music, Computers and Games",
-		},
+	jsonFile, err := os.Open("/internal/components/about/about.json")
+	if err != nil {
+		log.Fatalf("Failed to open JSON file: %s", err)
 	}
-	r.PathPrefix("/About").Handler(templ.Handler(about.Agregate(P)))
+	defer jsonFile.Close()
+
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatalf("Failed to read JSON file: %s", err)
+	}
+
+	var about []about.Paragraph
+	err = json.Unmarshal(byteValue, &about)
+
+	if err != nil {
+		log.Fatalf("Failed to unmarshal JSON: %s", err)
+	}
+	r.PathPrefix("/About").Handler(templ.Handler(about.Agregate(about)))
 
 	var L = []contact.Link{
 		{
@@ -252,7 +258,7 @@ func main() {
 
 	srv := &http.Server{
 		Handler:      r,
-		Addr:         "127.0.0.1:8000",
+		Addr:         "0.0.0.0:80",
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
