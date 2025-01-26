@@ -1,5 +1,4 @@
 package main
-
 import (
 	"bufio"
 	"compress/gzip"
@@ -204,7 +203,7 @@ func main() {
 	log.Println("Starting...")
 
 	r := mux.NewRouter()
-	r.Use(LoggingMiddleware)
+	//r.Use(LoggingMiddleware)
 	r.PathPrefix("/resources/").Handler(http.StripPrefix("/resources", http.FileServer(http.Dir("./resources"))))
 
 	var P = []about.Paragraph{
@@ -238,14 +237,9 @@ func main() {
 
 	var A = []project.Article{
 		{
-			Title:   "Portfolio",
-			Content: "I decided to make this portfolio using Go, HTMX, Templ and Sass as i have been interested in these technologies. I have found GO+HTMX to be a nice opportunity as they deal with 'the nitty gritty' more so than many .js frameworks i have worked with (although i was pretty tempted to write this in Next.js instead)\n",
-			URL:     "melker.dev",
-		},
-		{
-			Title:   "HearthHaven",
-			Content: "A game that i want to make, will write more about it given that it is further developed",
-			URL:     "https://github.com/Henrikswoon/Hearth-haven",
+			Title: "Masters Thesis",
+			Content: "My masters thesis *name yet undecided*, extending the work done in the paper Talos: Neutralizing Vulnerabilities with Security Workarounds for Rapid Response",
+			URL: "masters-thesis",
 		},
 	}
 	r.PathPrefix("/Projects").Handler(templ.Handler(project.Display(A)))
